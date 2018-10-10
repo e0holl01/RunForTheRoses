@@ -1,5 +1,5 @@
-[
- {
+[ 
+ { 
    "RACE": "Iroquois",
    "TRACK": "Churchill Downs",
    "DATE": "12-Sep-15",
@@ -8,12 +8,12 @@
    "SHOW": "UNBRIDLED OUTLAW",
    "4TH": "CONQUEST WINDY CITY"
  
- },
+ }, 
  {
    "RACE": "FrontRunner",
    "TRACK": "Santa Anita Park",
    "DATE": "26-Sep-15",
-   "WIN": "NYQUIST", //Nyquist won the 2016 Kentucky derby
+   "WIN": "NYQUIST", 
    "PLACE": "SWIPE",
    "SHOW": "HOLLYWOOD DON",
    "4TH": "RARE CANDY"

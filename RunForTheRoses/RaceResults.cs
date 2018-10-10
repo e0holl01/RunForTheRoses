@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace RunForTheRoses
 {
+    public class RootObject
+    {
+        public RaceResults[] RaceResults { get; set; }
+    }
+
    public class RaceResults
     {
         public DateTime Date { get; set; }
