@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace RunForTheRoses
 {
@@ -62,6 +63,12 @@ namespace RunForTheRoses
                 }
             }
             return raceResults;
+        }
+
+        public static List<Horses> DeserializeHorses()//I want this to return list of horses
+        {
+            var horses = new List<Horses>();
+            return horses;
         }
     }
 }
