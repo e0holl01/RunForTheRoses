@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace RunForTheRoses //this is from the json classes
         public string Win { get; set; }
         public string Place { get; set; }
         public string Show { get; set; }
+        [JsonProperty(PropertyName = "4TH")]
         public string Fourth { get; set; }
 
      

@@ -10,27 +10,30 @@ namespace RunForTheRoses
 {
     class Program
     {
-      public static void Main()
+      public static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the 2016 Repository for Leading up to the Run for the Roses. Press any key to continue."); 
+            Console.WriteLine("Welcome to the 2016 Repository for Leading up to the Run for the Roses. Press enter to see the list of placing horses."); //need to add pause so viewer can see the welcome line and then the line will clear.
             Console.ReadKey(true);
-            ClearLine(); //will clear the welome line. I didn't want the welcome line to be visible the entire time the app was open
+            ClearLine(); //will clear the welcome line. I didn't want the welcome line to be visible the entire time the app was open
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
             var fileName = Path.Combine(directory.FullName, "HorseRaceResults.csv");
             var fileContents = ReadFile(fileName);
-
-            Console.WriteLine(fileContents);
             fileName = Path.Combine(directory.FullName, "HorseRaces.json");
             var horseRaces = DeserializeHorseRaces(fileName);
            
             
             foreach (var horseRace in horseRaces) //writes the winning horse of each race to the console.
             {
-                Console.WriteLine(horseRace.Win);
+                Console.WriteLine(horseRace.Win + " was the winning horse at " + horseRace.Race + "." );
+                Console.WriteLine(horseRace.Place + " placed 2nd at " + horseRace.Race + ".");
+                Console.WriteLine(horseRace.Show + " placed 3rd at " + horseRace.Race + ".");
+                Console.WriteLine(horseRace.Fourth + " came in 4th at " + horseRace.Race + ".");
             }
 
-            Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue."); 
+            Console.ReadKey(true);
         }
 
         public static void ClearLine() //clears the Welcome line in the app //need a way to add a pause so it doesn't clear right away

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace RunForTheRoses
 {
@@ -14,6 +15,7 @@ namespace RunForTheRoses
         public string Win { get; set; }
         public string Place { get; set; }
         public string Show { get; set; }
+        [JsonProperty(PropertyName = "4TH")]
         public string Fourth { get; set; }
     }
 }
