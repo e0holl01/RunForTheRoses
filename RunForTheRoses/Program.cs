@@ -20,7 +20,7 @@ namespace RunForTheRoses
             var horseRaces = DeserializeHorseRaces(fileName);
 
 
-            foreach (var horseRace in horseRaces) //writes the winning horse of each race to the console.
+            foreach (var horseRace in horseRaces) //writes the winning horse of each race to the console from HorseRace.cs file.
             {
                 Console.WriteLine(horseRace.Win + " was the winning horse at " + horseRace.Race + ".");
                 Console.WriteLine(horseRace.Place + " placed 2nd at " + horseRace.Race + ".");
@@ -28,7 +28,7 @@ namespace RunForTheRoses
                 Console.WriteLine(horseRace.Fourth + " came in 4th at " + horseRace.Race + ".");
             }
 
-            fileName = Path.Combine(directory.FullName, "DerbyHorses.json");
+            fileName = Path.Combine(directory.FullName, "DerbyHorses.json"); //wrote horses back to json file
             SerializeHorseRaceToFile(horseRaces, fileName);
 
             Console.Write(Environment.NewLine); //provides space after list of horses
@@ -37,7 +37,7 @@ namespace RunForTheRoses
             Console.Clear();
 
             Console.WriteLine("What horse did you bet on in the 2016 Kentucky Derby?");
-            string line = Console.ReadLine();
+            string line = Console.ReadLine(); //disappears after answer is written
             Console.WriteLine("Did your horse place?");
         }
 
@@ -95,14 +95,12 @@ namespace RunForTheRoses
             {
                 horseRaces = serializer.Deserialize<List<HorseRace>>(jsonReader);
             }
-
-
             return horseRaces; //returns list of the horse races
         }
 
         public static void SerializeHorseRaceToFile(List<HorseRace> horseRaces, string fileName) //took list and wrote to json file
         {
-            
+
             var serializer = new JsonSerializer();
             using (var writer = new StreamWriter(fileName))
             using (var jsonWriter = new JsonTextWriter(writer))
@@ -113,7 +111,7 @@ namespace RunForTheRoses
 
         }
     }
-    
-    
 
-}
+
+
+} 
