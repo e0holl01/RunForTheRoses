@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -10,7 +7,7 @@ namespace RunForTheRoses
 {
     class Program
     {
-      public static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the 2016 Repository for Leading up to the Run for the Roses. Press enter to see the list of placing horses."); //need to add pause so viewer can see the welcome line and then the line will clear.
             Console.ReadKey(true);
@@ -21,19 +18,27 @@ namespace RunForTheRoses
             var fileContents = ReadFile(fileName);
             fileName = Path.Combine(directory.FullName, "HorseRaces.json");
             var horseRaces = DeserializeHorseRaces(fileName);
-           
-            
+
+
             foreach (var horseRace in horseRaces) //writes the winning horse of each race to the console.
             {
-                Console.WriteLine(horseRace.Win + " was the winning horse at " + horseRace.Race + "." );
+                Console.WriteLine(horseRace.Win + " was the winning horse at " + horseRace.Race + ".");
                 Console.WriteLine(horseRace.Place + " placed 2nd at " + horseRace.Race + ".");
                 Console.WriteLine(horseRace.Show + " placed 3rd at " + horseRace.Race + ".");
                 Console.WriteLine(horseRace.Fourth + " came in 4th at " + horseRace.Race + ".");
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Press any key to continue."); 
+            fileName = Path.Combine(directory.FullName, "DerbyHorses.json");
+            SerializeHorseRaceToFile(horseRaces, fileName);
+
+            Console.Write(Environment.NewLine); //provides space after list of horses
+            Console.WriteLine("Press any key to continue.");
             Console.ReadKey(true);
+            Console.Clear();
+
+            Console.WriteLine("What horse did you bet on in the 2016 Kentucky Derby?");
+            string line = Console.ReadLine();
+            Console.WriteLine("Did your horse place?");
         }
 
         public static void ClearLine() //clears the Welcome line in the app //need a way to add a pause so it doesn't clear right away
@@ -58,11 +63,11 @@ namespace RunForTheRoses
             {
                 string line = "";
                 reader.ReadLine(); //reads next line in file and returns. Reads to end of file and returns null
-                while((line = reader.ReadLine()) !=null) //reads file to end of line if not null
+                while ((line = reader.ReadLine()) != null) //reads file to end of line if not null
                 {
                     var raceResult = new RaceResults();
-                    string[] values = line.Split(','); 
-                    
+                    string[] values = line.Split(',');
+
                     DateTime Date;
                     if (DateTime.TryParse(values[0], out Date))
                     {
@@ -78,7 +83,7 @@ namespace RunForTheRoses
                 }
             }
             return raceResults; //returns a list
-           
+
         }
 
         public static List<HorseRace> DeserializeHorseRaces(string fileName)//I want this to return list of horses
@@ -90,9 +95,25 @@ namespace RunForTheRoses
             {
                 horseRaces = serializer.Deserialize<List<HorseRace>>(jsonReader);
             }
-               
+
 
             return horseRaces; //returns list of the horse races
         }
+
+        public static void SerializeHorseRaceToFile(List<HorseRace> horseRaces, string fileName) //took list and wrote to json file
+        {
+            
+            var serializer = new JsonSerializer();
+            using (var writer = new StreamWriter(fileName))
+            using (var jsonWriter = new JsonTextWriter(writer))
+            {
+                serializer.Serialize(jsonWriter, horseRaces);
+            }
+
+
+        }
     }
+    
+    
+
 }
