@@ -12,19 +12,20 @@ namespace RunForTheRoses
     {
       public static void Main()
         {
-         Console.WriteLine("Welcome to the 2016 Repository for Leading up to the Run for the Roses."); //need to add pause so viewer can see the welcome line and then the line will clear.
+            Console.WriteLine("Welcome to the 2016 Repository for Leading up to the Run for the Roses. Press any key to continue."); 
+            Console.ReadKey(true);
             ClearLine(); //will clear the welome line. I didn't want the welcome line to be visible the entire time the app was open
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
             var fileName = Path.Combine(directory.FullName, "HorseRaceResults.csv");
-            
             var fileContents = ReadFile(fileName);
+
             Console.WriteLine(fileContents);
             fileName = Path.Combine(directory.FullName, "HorseRaces.json");
             var horseRaces = DeserializeHorseRaces(fileName);
-            //FileName    "C:\\Users\\eholland\\Desktop\\RunForTheRoses\\RunForTheRoses\\RunForTheRoses\\bin\\Debug\\HoreRaceResults.csv" string
+           
             
-            foreach (var horseRace in horseRaces)
+            foreach (var horseRace in horseRaces) //writes the winning horse of each race to the console.
             {
                 Console.WriteLine(horseRace.Win);
             }
@@ -39,7 +40,7 @@ namespace RunForTheRoses
             Console.SetCursorPosition(0, Console.CursorTop - 1);
         }
 
-        public static string ReadFile(string fileName)
+        public static string ReadFile(string fileName) //reads file to end of file
         {
             using (var reader = new StreamReader(fileName))
             {
@@ -53,27 +54,27 @@ namespace RunForTheRoses
             using (var reader = new StreamReader(fileName))
             {
                 string line = "";
-                reader.ReadLine();
-                while((line = reader.ReadLine()) !=null)
+                reader.ReadLine(); //reads next line in file and returns. Reads to end of file and returns null
+                while((line = reader.ReadLine()) !=null) //reads file to end of line if not null
                 {
                     var raceResult = new RaceResults();
-                    string[] values = line.Split(',');
+                    string[] values = line.Split(','); 
                     
                     DateTime Date;
                     if (DateTime.TryParse(values[0], out Date))
                     {
                         raceResult.Date = Date;
                     }
-                    raceResult.Track = values[6];
-                    raceResult.Race = values[1];
-                    raceResult.Win = values[2];
-                    raceResult.Place = values[3];
-                    raceResult.Show = values[4];
-                    raceResult.Fourth = values[5];
-                    raceResults.Add(raceResult);
+                    raceResult.Track = values[1];
+                    raceResult.Race = values[2];
+                    raceResult.Win = values[3];
+                    raceResult.Place = values[4];
+                    raceResult.Show = values[5];
+                    raceResult.Fourth = values[6];
+                    raceResults.Add(raceResult); //adds values to list
                 }
             }
-            return raceResults;
+            return raceResults; //returns a list
            
         }
 
@@ -88,7 +89,7 @@ namespace RunForTheRoses
             }
                
 
-            return horseRaces;
+            return horseRaces; //returns list of the horse races
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RunForTheRoses
+namespace RunForTheRoses //this is from the json classes
 {
-    public class RootObject
+    public class RootObject //represents Json file
     {
         public HorseRace[] HorseRace { get; set; }
     }
@@ -14,7 +14,7 @@ namespace RunForTheRoses
    public class HorseRace
     {
         public string Track { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime? Date { get; set; } //? makes null value - Date has some null values in file
         public string Race { get; set; }
         public string Win { get; set; }
         public string Place { get; set; }
