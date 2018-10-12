@@ -16,10 +16,20 @@ namespace RunForTheRoses
             ClearLine(); //will clear the welome line. I didn't want the welcome line to be visible the entire time the app was open
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directory.FullName, "CSVDerby prep 2016.csv");
-            var fileContents = ReadRaceResults(fileName);
+            var fileName = Path.Combine(directory.FullName, "HorseRaceResults.csv");
+            
+            var fileContents = ReadFile(fileName);
+            Console.WriteLine(fileContents);
+            fileName = Path.Combine(directory.FullName, "HorseRaces.json");
+            var horseRaces = DeserializeHorseRaces(fileName);
+            //FileName    "C:\\Users\\eholland\\Desktop\\RunForTheRoses\\RunForTheRoses\\RunForTheRoses\\bin\\Debug\\HoreRaceResults.csv" string
+            
+            foreach (var horseRace in horseRaces)
+            {
+                Console.WriteLine(horseRace.Win);
+            }
+
             Console.ReadLine();
-   
         }
 
         public static void ClearLine() //clears the Welcome line in the app //need a way to add a pause so it doesn't clear right away
@@ -54,6 +64,7 @@ namespace RunForTheRoses
                     {
                         raceResult.Date = Date;
                     }
+                    raceResult.Track = values[6];
                     raceResult.Race = values[1];
                     raceResult.Win = values[2];
                     raceResult.Place = values[3];
@@ -63,12 +74,21 @@ namespace RunForTheRoses
                 }
             }
             return raceResults;
+           
         }
 
-        public static List<Horses> DeserializeHorses()//I want this to return list of horses
+        public static List<HorseRace> DeserializeHorseRaces(string fileName)//I want this to return list of horses
         {
-            var horses = new List<Horses>();
-            return horses;
+            var horseRaces = new List<HorseRace>();
+            var serializer = new JsonSerializer();
+            using (var reader = new StreamReader(fileName))
+            using (var jsonReader = new JsonTextReader(reader))
+            {
+                horseRaces = serializer.Deserialize<List<HorseRace>>(jsonReader);
+            }
+               
+
+            return horseRaces;
         }
     }
 }

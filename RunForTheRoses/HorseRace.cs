@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RunForTheRoses
 {
-    public class RaceResults
+    public class RootObject
+    {
+        public HorseRace[] HorseRace { get; set; }
+    }
+
+   public class HorseRace
     {
         public string Track { get; set; }
         public DateTime? Date { get; set; }
@@ -15,5 +20,7 @@ namespace RunForTheRoses
         public string Place { get; set; }
         public string Show { get; set; }
         public string Fourth { get; set; }
+
+     
     }
 }
