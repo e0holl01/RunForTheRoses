@@ -10,10 +10,12 @@ namespace RunForTheRoses
     {
         public static void Main(string[] args)
         {
-            //Welcome the user to the app//
+            //Welcome the user to the app
             Console.WriteLine("Welcome to the 2016 Repository for Leading up to the Run for the Roses. Press enter to see the list of placing horses."); 
             Console.ReadKey(true);
-            ClearLine(); //will clear the welcome line. I didn't want the welcome line to be visible the entire time the app was open
+          
+            ClearLine(); 
+            //Get CurrentDirectory creates a file in the current directory
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
             var fileName = Path.Combine(directory.FullName, "HorseRaceResults.csv");
@@ -21,33 +23,39 @@ namespace RunForTheRoses
             fileName = Path.Combine(directory.FullName, "HorseRaces.json");
             var horseRaces = DeserializeHorseRaces(fileName);
 
-
-            foreach (var horseRace in horseRaces) //writes the winning horse of each race to the console from HorseRace.cs file.
+            //writes the winning horse of each race to the console from HorseRace.cs file.
+            foreach (var horseRace in horseRaces)
             {
                 Console.WriteLine(horseRace.Win + " was the winning horse at " + horseRace.Race + ".");
                 Console.WriteLine(horseRace.Place + " placed 2nd at " + horseRace.Race + ".");
                 Console.WriteLine(horseRace.Show + " placed 3rd at " + horseRace.Race + ".");
                 Console.WriteLine(horseRace.Fourth + " came in 4th at " + horseRace.Race + ".");
             }
-
-            fileName = Path.Combine(directory.FullName, "DerbyHorses.json"); //wrote horses back to json file
+            //writes horses back to json file
+            fileName = Path.Combine(directory.FullName, "DerbyHorses.json"); 
             SerializeHorseRaceToFile(horseRaces, fileName);
 
+            //After the list of the winning horses from the HorseRace repository is displayed. There
+            //is a new emply line. The user is prompted to select any key to enter. The screen is then cleared
+            
             Console.Write(Environment.NewLine); //provides space after list of horses
             Console.WriteLine("Press any key to continue.");
             Console.ReadKey(true);
             Console.Clear();
 
+            //The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
+            //STILL NEED TO ENTER LIST
             Console.WriteLine("Here are the results of the 2016 Kentucky Derby. Press enter to see the list.");
             Console.ReadKey(true);
 
+            //The user is then prompted to enter what horse they bet on
             Console.WriteLine("What horse did you bet on in the 2016 Kentucky Derby?");
 
+            //This code will validate the user's input on the horse they bet on and will display what place they 
+            //finished and if their horse is not a valid horse it will return null
             string derbyDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo derbydirectory = new DirectoryInfo(currentDirectory);
-            //var fileName2 = Path.Combine(directory.FullName, "2016RunForTheRosesResults.csv");
-            //var fileContents2 = ReadFile(fileName2);
-           var fileName2 = Path.Combine(directory.FullName, "2016RunForTheRosesResults.json");
+            var fileName2 = Path.Combine(directory.FullName, "2016RunForTheRosesResults.json");
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName2);
             string horseBet = Console.ReadLine(); //user entry
             var horse = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
@@ -60,14 +68,17 @@ namespace RunForTheRoses
             throw new NotImplementedException();
         }
 
-        public static void ClearLine() //clears the Welcome line in the app //need a way to add a pause so it doesn't clear right away
+        //This method will clear the welcome line. 
+        //I didn't want the welcome line to be visible the entire ime the app was open
+        public static void ClearLine()
         {
             Console.SetCursorPosition(0, Console.CursorTop - 1);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop - 1);
         }
 
-        public static string ReadFile(string fileName) //reads file to end of file
+        //The ReadFile method reads the entire file to the end of it's file
+        public static string ReadFile(string fileName) 
         {
             using (var reader = new StreamReader(fileName))
             {
