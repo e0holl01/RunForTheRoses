@@ -11,45 +11,17 @@ namespace RunForTheRoses
         public static void Main(string[] args)
         {
             //Welcome the user to the app
-            Console.WriteLine("Welcome to the 2016 Repository for Leading up to the Run for the Roses. Press enter to see the list of placing horses."); 
+            Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); 
             Console.ReadKey(true);
             ClearLine(); 
-            //Get CurrentDirectory creates a file in the current directory
-            string currentDirectory = Directory.GetCurrentDirectory();
-            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directory.FullName, "HorseRaceResults.csv");
-            var fileContents = ReadFile(fileName);
-            fileName = Path.Combine(directory.FullName, "HorseRaces.json");
-            var horseRaces = DeserializeHorseRaces(fileName);
-
-            //writes the winning horse of each race to the console from HorseRace.cs file.
-            foreach (var horseRace in horseRaces)
-            {
-                Console.WriteLine(horseRace.Win + " was the winning horse at " + horseRace.Race + ".");
-                Console.WriteLine(horseRace.Place + " placed 2nd at " + horseRace.Race + ".");
-                Console.WriteLine(horseRace.Show + " placed 3rd at " + horseRace.Race + ".");
-                Console.WriteLine(horseRace.Fourth + " came in 4th at " + horseRace.Race + ".");
-            }
-            //writes horses back to json file
-            fileName = Path.Combine(directory.FullName, "DerbyHorses.json"); 
-            SerializeHorseRaceToFile(horseRaces, fileName);
-
-            //After the list of the winning horses from the HorseRace repository is displayed. There
-            //is a new emply line. The user is prompted to select any key to enter. The screen is then cleared
-            
-            Console.Write(Environment.NewLine); //provides space after list of horses
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadKey(true);
-            Console.Clear();
 
             //The user is then able to see the list of the 2016 Kentucky Derby horses that ran in 
             //the race
-            Console.WriteLine("Here are the runners of the 2016 Kentucky Derby. Press enter to see the list.");
-            Console.ReadKey(true);
+            
             string derbyDirectory = Directory.GetCurrentDirectory();
-            DirectoryInfo derbydirectory = new DirectoryInfo(currentDirectory);
-            var fileName2 = Path.Combine(directory.FullName, "2016RunForTheRosesResults.json");
-            var runForTheRoses = DeserializeRunForTheRosesResults(fileName2);
+            DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
+            var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json");
+            var runForTheRoses = DeserializeRunForTheRosesResults(fileName);
             //writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file.
             foreach (var derbyHorse in runForTheRoses)
             {
@@ -69,8 +41,8 @@ namespace RunForTheRoses
             Console.WriteLine(horse == null ? "That horse didn't run in the 2016 Run for the Roses.": horse.Horse + " came in "+ horse.Place + " place."); //way to look at 2016RunForTheRoses to validate?
             Console.ReadLine();
 
-            fileName2 = Path.Combine(directory.FullName, "DerbyBet.json");
-            SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName2);
+            fileName = Path.Combine(derbydirectory.FullName, "DerbyBet.json");
+            SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName);
         }
 
         //private static object DeserializeRunForTheRoses(string fileName)
@@ -96,64 +68,6 @@ namespace RunForTheRoses
             }
         }
 
-        //Turns RaceResults into a List
-        public static List<RaceResults> ReadRaceResults(string fileName)
-        {
-            var raceResults = new List<RaceResults>();
-            using (var reader = new StreamReader(fileName))
-            {
-                string line = "";
-                reader.ReadLine(); //reads next line in file and returns. Reads to end of file and returns null
-                while ((line = reader.ReadLine()) != null) //reads file to end of line if not null
-                {
-                    var raceResult = new RaceResults();
-                    string[] values = line.Split(',');
-
-                    DateTime Date;
-                    if (DateTime.TryParse(values[0], out Date))
-                    {
-                        raceResult.Date = Date;
-                    }
-                    raceResult.Track = values[1];
-                    raceResult.Race = values[2];
-                    raceResult.Win = values[3];
-                    raceResult.Place = values[4];
-                    raceResult.Show = values[5];
-                    raceResult.Fourth = values[6];
-                    raceResults.Add(raceResult); //adds values to list
-                }
-            }
-            return raceResults; //returns a RaceResults list
-
-        }
-
-       // returns list of HorseRaces
-        public static List<HorseRace> DeserializeHorseRaces(string fileName)
-        {
-            var horseRaces = new List<HorseRace>();
-            var serializer = new JsonSerializer();
-            using (var reader = new StreamReader(fileName))
-            using (var jsonReader = new JsonTextReader(reader))
-            {
-                horseRaces = serializer.Deserialize<List<HorseRace>>(jsonReader);
-            }
-
-            return horseRaces; //returns list of the horse races
-        }
-
-        //took list and wrote to json file
-        public static void SerializeHorseRaceToFile(List<HorseRace> horseRaces, string fileName)
-        {
-
-            var serializer = new JsonSerializer();
-            using (var writer = new StreamWriter(fileName))
-            using (var jsonWriter = new JsonTextWriter(writer))
-            {
-                serializer.Serialize(jsonWriter, horseRaces);
-            }
-
-
-        }
 
         //Makes List of RunFortheRosesResults
         public static List<RunForTheRosesResults> ReadRunForTheRosesResults(string fileName)
