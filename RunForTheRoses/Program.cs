@@ -15,8 +15,7 @@ namespace RunForTheRoses
             Console.ReadKey(true);
             ClearLine(); 
 
-            //The user is then able to see the list of the 2016 Kentucky Derby horses that ran in 
-            //the race
+            //The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
             
             string derbyDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
@@ -30,19 +29,24 @@ namespace RunForTheRoses
             }
             Console.Write(Environment.NewLine); //provides space after list of horses
             //The user is then prompted to enter what horse they bet on
-            Console.WriteLine("What horse did you bet on in the 2016 Kentucky Derby?");
-
+            Console.Write("What horse did you bet on in the 2016 Kentucky Derby?");
+            
             //This code will validate the user's input on the horse they bet on and will display what place they 
             //finished and if their horse is not a valid horse it will return null
-            
-          
-            string horseBet = Console.ReadLine(); //user entry
+
+            string horseBet = Console.ReadLine(); //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
+            Console.Write(Environment.NewLine);
             var horse = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
-            Console.WriteLine(horse == null ? "That horse didn't run in the 2016 Run for the Roses.": horse.Horse + " came in "+ horse.Place + " place."); //way to look at 2016RunForTheRoses to validate?
+            Console.Write(horse == null ? "That horse didn't run in the 2016 Run for the Roses.": horse.Horse + " came in "+ horse.Place + " place."); //way to look at 2016RunForTheRoses to validate?
             Console.ReadLine();
 
-            fileName = Path.Combine(derbydirectory.FullName, "DerbyBet.json");
+            fileName = Path.Combine(derbydirectory.FullName, "DerbyBet.json"); //this is not what i want look at mentors example
             SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName);
+
+            //Console.Write(Environment.NewLine); //provides space after answer
+            //Console.Write("What would your exacta bet have been? "); 
+            //Console.Write("What would your trifecta bet have been? ")
+
         }
 
         //private static object DeserializeRunForTheRoses(string fileName)
