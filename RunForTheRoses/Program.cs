@@ -11,7 +11,7 @@ namespace RunForTheRoses
         public static void Main(string[] args)
         {
             //Welcome the user to the app
-            Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); 
+            Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //Need a quit to exit
             Console.ReadKey(true);
             ClearLine(); 
 
