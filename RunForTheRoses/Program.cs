@@ -47,8 +47,8 @@ namespace RunForTheRoses
                 if (horseBetAnswer == null)
                 {
 
-                    Console.WriteLine("Please pick a horse from the list.");
-                    nullAnswer = true;
+                    Console.WriteLine("That horse didn't run in the 2016 Run for the Roses. Please pick a horse from the list.");
+                    
                 }
                 else
                 {
@@ -60,51 +60,12 @@ namespace RunForTheRoses
 
             }
 
-            Console.Read();
-            //Console.WriteLine("What horse would you have bet to Win the 2016 Kentucky Derby?"); //The user is then prompted to enter what horse they bet on
-            //string horseBet = Console.ReadLine();
-
-            // var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
-            // Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place."); //way to look at 2016RunForTheRoses to validate?
-            // Console.ReadLine();
-
-
-            //if (horseBetAnswer.Horse == "Nyquist")
-            //{
-            //    Console.WriteLine("Awesome! " + horseBetAnswer.Horse + " won the 2016 Kentucky Derby!");
-
-            //}
-
-            //if (horseBetAnswer.Horse == null)
-            //{
-
-            //}
-
-            //else
-            //{
-            //    Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
-            //} //when enter is pressed and no answer is given - the line is not writing to the console
-
-
-
-
-
-
-
-
-            //Console.Write("What would your exacta bet have been? "); 
-            //string exacta = Console.ReadLine();
-            //Console.Write("What would your trifecta bet have been? ")
-
+            Console.WriteLine("The progragam will now close. Thanks!");
+            
 
             fileName = Path.Combine(derbydirectory.FullName, "DerbyBet.json"); //this is not what i want look at mentors example
             SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName);
 
-        }
-
-        private static object DeserializeRunForTheRoses(string fileName)
-        {
-            throw new NotImplementedException();
         }
 
         //This method will clear the welcome line. 
