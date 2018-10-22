@@ -32,34 +32,65 @@ namespace RunForTheRoses
 
             //This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
-    
-           
+            //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
+            //User gets congrats statement if they entered Nyquist
 
-           Console.WriteLine("What horse would you have bet to Win the 2016 Kentucky Derby?"); //The user is then prompted to enter what horse they bet on
-           string horseBet = Console.ReadLine();
+            bool nullAnswer = true;
+            while (nullAnswer)
+            {
+                Console.WriteLine("What horse would you have bet to Win the 2016 Kentucky Derby?"); //The user is then prompted to enter what horse they bet on
+                string horseBet = Console.ReadLine();
 
-            var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
-            Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place."); //way to look at 2016RunForTheRoses to validate?
-            Console.ReadLine();
+                var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
 
 
-                if (horseBetAnswer.Horse == "Nyquist")
+                if (horseBetAnswer == null)
                 {
-                    Console.WriteLine("Awesome! " + horseBetAnswer.Horse + " won the 2016 Kentucky Derby!");
 
+                    Console.WriteLine("Please pick a horse from the list.");
+                    nullAnswer = true;
+                }
+                else
+                {
+                    Console.Write(horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+                    nullAnswer = false;
                 }
 
-                //else
-                //{
-                //    Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
-                //} //when enter is pressed and no answer is given - the line is not writing to the console
+                Console.Write(Environment.NewLine); //provides a line space after null answer and starting loop over
 
-           
-            Console.Write(Environment.NewLine);
-            
-            
-            Console.Write(Environment.NewLine); //provides space after answer
-            
+            }
+
+            Console.Read();
+            //Console.WriteLine("What horse would you have bet to Win the 2016 Kentucky Derby?"); //The user is then prompted to enter what horse they bet on
+            //string horseBet = Console.ReadLine();
+
+            // var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
+            // Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place."); //way to look at 2016RunForTheRoses to validate?
+            // Console.ReadLine();
+
+
+            //if (horseBetAnswer.Horse == "Nyquist")
+            //{
+            //    Console.WriteLine("Awesome! " + horseBetAnswer.Horse + " won the 2016 Kentucky Derby!");
+
+            //}
+
+            //if (horseBetAnswer.Horse == null)
+            //{
+
+            //}
+
+            //else
+            //{
+            //    Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+            //} //when enter is pressed and no answer is given - the line is not writing to the console
+
+
+
+
+
+
+
 
             //Console.Write("What would your exacta bet have been? "); 
             //string exacta = Console.ReadLine();
