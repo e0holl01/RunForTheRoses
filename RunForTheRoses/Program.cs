@@ -28,21 +28,41 @@ namespace RunForTheRoses
                 
             }
             Console.Write(Environment.NewLine); //provides space after list of horses
-            //The user is then prompted to enter what horse they bet on
-            Console.Write("What horse would you have bet on for 2016 Kentucky Derby?");
-            
-            //This code will validate the user's input on the horse they bet on and will display what place they 
-            //finished and if their horse is not a valid horse it will return null
 
-            string horseBet = Console.ReadLine(); //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
-            
+
+            //This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
+            //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
+    
+           
+
+           Console.WriteLine("What horse would you have bet to Win the 2016 Kentucky Derby?"); //The user is then prompted to enter what horse they bet on
+           string horseBet = Console.ReadLine();
+
+            var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
+            Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place."); //way to look at 2016RunForTheRoses to validate?
+            Console.ReadLine();
+
+
+                if (horseBetAnswer.Horse == "Nyquist")
+                {
+                    Console.WriteLine("Awesome! " + horseBetAnswer.Horse + " won the 2016 Kentucky Derby!");
+
+                }
+
+                //else
+                //{
+                //    Console.WriteLine(horseBetAnswer == null ? "That horse didn't run in the 2016 Run for the Roses." : horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+                //} //when enter is pressed and no answer is given - the line is not writing to the console
+
+           
             Console.Write(Environment.NewLine);
-            var horse = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
-            Console.WriteLine(horse == null ? "That horse didn't run in the 2016 Run for the Roses.": horse.Horse + " came in "+ horse.Place + " place.");
+            
+            
             Console.Write(Environment.NewLine); //provides space after answer
+            
 
-            Console.Write("What would your exacta bet have been? "); 
-            string exacta = Console.ReadLine();
+            //Console.Write("What would your exacta bet have been? "); 
+            //string exacta = Console.ReadLine();
             //Console.Write("What would your trifecta bet have been? ")
 
 
@@ -51,10 +71,10 @@ namespace RunForTheRoses
 
         }
 
-        //private static object DeserializeRunForTheRoses(string fileName)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private static object DeserializeRunForTheRoses(string fileName)
+        {
+            throw new NotImplementedException();
+        }
 
         //This method will clear the welcome line. 
         //I didn't want the welcome line to be visible the entire ime the app was open
