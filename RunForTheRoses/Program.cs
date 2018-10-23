@@ -38,7 +38,6 @@ namespace RunForTheRoses
             bool nullAnswer = true;
             while (nullAnswer)
             {
-                Console.WriteLine("What horse would you have bet to Win the 2016 Kentucky Derby?"); //The user is then prompted to enter what horse they bet on
                 string horseBet = Console.ReadLine();
 
                 var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
@@ -75,6 +74,8 @@ namespace RunForTheRoses
             Console.SetCursorPosition(0, Console.CursorTop - 1);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop - 1);
+
+
         }
 
         //The ReadFile method reads the entire file to the end of it's file
