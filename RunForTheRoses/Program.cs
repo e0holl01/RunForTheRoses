@@ -22,7 +22,7 @@ namespace RunForTheRoses
             var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json");
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName);
             //writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file.
-            foreach (var derbyHorse in runForTheRoses)
+            foreach (var derbyHorse in runForTheRoses) //lists horses in order. randomize?
             {
                 Console.WriteLine(derbyHorse.Horse);
                 
@@ -132,6 +132,18 @@ namespace RunForTheRoses
             }
 
 
+        }
+
+        static void AddHorse
+        {
+            Console.Write("What horse did you bet to win the 2016 Derby?");
+            var horseName = Console.ReadLine();
+
+            var betWinHorse = new BetWinHorse
+            {
+                HorseName = horseName;
+            
+            }
         }
     }
 
