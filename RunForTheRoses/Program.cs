@@ -13,29 +13,54 @@ namespace RunForTheRoses
             //1. Welcomes the user to the app
             Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //enter a quit to exit
             Console.ReadKey(true);
+            Console.Write(Environment.NewLine);
+            Console.WriteLine("Please enter your name to place a bet.");
+            var userName = Console.ReadLine();
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
-
             string derbyDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
             var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json");
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName);
-            
+
             //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
-            foreach (var derbyHorse in runForTheRoses) //lists horses in order. randomize?
+            Random random = new Random();
+            for (int i = 19; i >= 0; i--)
             {
-                //shuffledList = derbyHorse.Horse.OrderBy(x => Random.ReferenceEquals).ToList(shuffledHorseList); shuffledList = myList.OrderBy( x => Random.value ).ToList( );
-                Console.WriteLine(derbyHorse.Horse);
-                
+                var j = random.Next(0, i);
+                Console.WriteLine(runForTheRoses[j].Horse);
+                var holder = runForTheRoses[j];
+                runForTheRoses[j] = runForTheRoses[i];
+                runForTheRoses[i] = holder;
             }
+
+            //var test = Enumerable.Range(0, 20);
+            //Random random = new Random();
+            //var ranom = test.OrderBy(c => random.Next());
+
+            //for (int i = 0; i < 21; i++) Console.WriteLine(ranom.ToArray()[i]);
+
+
+            //for (int i = random.Next(1, 20), j = 1 ; j < 21; i = random.Next(1, 20),j++)
+            //{
+            //    Console.WriteLine(runForTheRoses[i].Horse);
+            //}
+
+            //foreach (var derbyHorse in runForTheRoses) //lists horses in order. randomize?
+            //{
+            //    //shuffledList = derbyHorse.Horse.OrderBy(x => Random.ReferenceEquals).ToList(shuffledHorseList); shuffledList = myList.OrderBy( x => Random.value ).ToList( );
+
+            //    Console.WriteLine(derbyHorse.Horse);
+
+            //}
             Console.Write(Environment.NewLine); //provides space after list of horses
 
             
             Console.Write("What horse did you bet to win the 2016 Derby?");
             Console.Write(Environment.NewLine);
 
-            //5. This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
+            //4. This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
             //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
             //User gets congrats statement if they entered Nyquist
@@ -68,11 +93,11 @@ namespace RunForTheRoses
 
             }
 
-            //6.
-            Console.WriteLine("The progragam will now close. Thanks!");
+            //5.
+            Console.WriteLine("The program will now close. Thanks!");
             
 
-            //fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.csv"); //this is not what i want look at mentors example
+            fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.csv"); //this is not what i want look at mentors example
             SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName);
 
             Console.Read();
