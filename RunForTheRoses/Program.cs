@@ -10,29 +10,32 @@ namespace RunForTheRoses
     {
         public static void Main(string[] args)
         {
-            //Welcome the user to the app
-            Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //Need a quit to exit
+            //1. Welcomes the user to the app
+            Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //enter a quit to exit
             Console.ReadKey(true);
-            Console.Clear();    //This method will clear the welcome line. 
-                                //I didn't want the welcome line to be visible the entire ime the app was open
+            Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
-            //The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
+            //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
 
             string derbyDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
             var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json");
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName);
-            //writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file.
+            
+            //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
             foreach (var derbyHorse in runForTheRoses) //lists horses in order. randomize?
             {
+                //shuffledList = derbyHorse.Horse.OrderBy(x => Random.ReferenceEquals).ToList(shuffledHorseList); shuffledList = myList.OrderBy( x => Random.value ).ToList( );
                 Console.WriteLine(derbyHorse.Horse);
                 
             }
             Console.Write(Environment.NewLine); //provides space after list of horses
 
+            
             Console.Write("What horse did you bet to win the 2016 Derby?");
             Console.Write(Environment.NewLine);
-            //This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
+
+            //5. This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
             //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
             //User gets congrats statement if they entered Nyquist
@@ -41,7 +44,7 @@ namespace RunForTheRoses
             while (nullAnswer)
             {
                 string horseBet = Console.ReadLine();
-                //Console.Write(Environment.NewLine);
+                Console.Write(Environment.NewLine);
                 
 
                 var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
@@ -65,10 +68,11 @@ namespace RunForTheRoses
 
             }
 
+            //6.
             Console.WriteLine("The progragam will now close. Thanks!");
             
 
-            fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.csv"); //this is not what i want look at mentors example
+            //fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.csv"); //this is not what i want look at mentors example
             SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName);
 
             Console.Read();
@@ -99,9 +103,6 @@ namespace RunForTheRoses
                 {
                     string[] values = line.Split(',');
                     var raceResults = new RunForTheRosesResults { Race = values[1], Place = values[2], Horse = values[3] };
-                    //new RunForTheRosesResults().Race = values[1];
-                    //new RunForTheRosesResults().Place = values[2];
-                    //new RunForTheRosesResults().Horse = values[3];
                     new RunForTheRosesResults().Add(new RunForTheRosesResults()); //adds values to list
                 }
             }
