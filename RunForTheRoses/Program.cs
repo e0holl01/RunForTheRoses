@@ -13,10 +13,11 @@ namespace RunForTheRoses
             //Welcome the user to the app
             Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //Need a quit to exit
             Console.ReadKey(true);
-            ClearLine(); 
+            Console.Clear();    //This method will clear the welcome line. 
+                                //I didn't want the welcome line to be visible the entire ime the app was open
 
             //The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
-            
+
             string derbyDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
             var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json");
@@ -29,7 +30,8 @@ namespace RunForTheRoses
             }
             Console.Write(Environment.NewLine); //provides space after list of horses
 
-
+            Console.Write("What horse did you bet to win the 2016 Derby?");
+            Console.Write(Environment.NewLine);
             //This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
             //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
@@ -39,6 +41,8 @@ namespace RunForTheRoses
             while (nullAnswer)
             {
                 string horseBet = Console.ReadLine();
+                //Console.Write(Environment.NewLine);
+                
 
                 var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
 
@@ -51,7 +55,9 @@ namespace RunForTheRoses
                 }
                 else
                 {
+                    Console.Clear();
                     Console.Write(horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+                    Console.Write(Environment.NewLine);
                     nullAnswer = false;
                 }
 
@@ -62,21 +68,14 @@ namespace RunForTheRoses
             Console.WriteLine("The progragam will now close. Thanks!");
             
 
-            fileName = Path.Combine(derbydirectory.FullName, "DerbyBet.json"); //this is not what i want look at mentors example
+            fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.csv"); //this is not what i want look at mentors example
             SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName);
 
-        }
-
-        //This method will clear the welcome line. 
-        //I didn't want the welcome line to be visible the entire ime the app was open
-        public static void ClearLine()
-        {
-            Console.SetCursorPosition(0, Console.CursorTop - 1);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, Console.CursorTop - 1);
-
+            Console.Read();
 
         }
+
+      
 
         //The ReadFile method reads the entire file to the end of it's file
         public static string ReadFile(string fileName) 
@@ -99,9 +98,10 @@ namespace RunForTheRoses
                 while ((line = reader.ReadLine()) != null) //reads file to end of line if not null
                 {
                     string[] values = line.Split(',');
-                    new RunForTheRosesResults().Race = values[1];
-                    new RunForTheRosesResults().Place = values[2];
-                    new RunForTheRosesResults().Horse = values[3];
+                    var raceResults = new RunForTheRosesResults { Race = values[1], Place = values[2], Horse = values[3] };
+                    //new RunForTheRosesResults().Race = values[1];
+                    //new RunForTheRosesResults().Place = values[2];
+                    //new RunForTheRosesResults().Horse = values[3];
                     new RunForTheRosesResults().Add(new RunForTheRosesResults()); //adds values to list
                 }
             }
@@ -134,19 +134,19 @@ namespace RunForTheRoses
 
         }
 
-        static void AddHorse
-        {
-            Console.Write("What horse did you bet to win the 2016 Derby?");
-            var horseName = Console.ReadLine();
+        //static void AddHorse
+        //{
+        //    Console.Write("What horse did you bet to win the 2016 Derby?");
+        //    var horseName = Console.ReadLine();
 
-            var betWinHorse = new BetWinHorse
-            {
-                HorseName = horseName;
+        //    var betWinHorse = new BetWinHorse
+        //    {
+        //        HorseName = horseName;
             
-            }
+        //    }
         }
     }
 
 
 
-} 
+ 
