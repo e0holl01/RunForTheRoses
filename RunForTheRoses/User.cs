@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace RunForTheRoses
 {
-    class DerbyResults
+    class User
     {
-        public  string Place { get; set; }
-        public  string Horse { get; set; }
+        public readonly string UserName;
 
-  
-        
+        public User(string userName)
+        {
+            UserName = userName;
+        }
     }
 }

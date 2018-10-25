@@ -14,8 +14,7 @@ namespace RunForTheRoses
             Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //enter a quit to exit
             Console.ReadKey(true);
             Console.Write(Environment.NewLine);
-            Console.WriteLine("Please enter your name to place a bet.");
-            var userName = Console.ReadLine();
+           
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
@@ -35,28 +34,11 @@ namespace RunForTheRoses
                 runForTheRoses[i] = holder;
             }
 
-            //var test = Enumerable.Range(0, 20);
-            //Random random = new Random();
-            //var ranom = test.OrderBy(c => random.Next());
-
-            //for (int i = 0; i < 21; i++) Console.WriteLine(ranom.ToArray()[i]);
-
-
-            //for (int i = random.Next(1, 20), j = 1 ; j < 21; i = random.Next(1, 20),j++)
-            //{
-            //    Console.WriteLine(runForTheRoses[i].Horse);
-            //}
-
-            //foreach (var derbyHorse in runForTheRoses) //lists horses in order. randomize?
-            //{
-            //    //shuffledList = derbyHorse.Horse.OrderBy(x => Random.ReferenceEquals).ToList(shuffledHorseList); shuffledList = myList.OrderBy( x => Random.value ).ToList( );
-
-            //    Console.WriteLine(derbyHorse.Horse);
-
-            //}
             Console.Write(Environment.NewLine); //provides space after list of horses
 
-            
+            Console.WriteLine("Please enter your name to place a bet.");
+            var userName = Console.ReadLine();
+            Console.Write(Environment.NewLine);
             Console.Write("What horse did you bet to win the 2016 Derby?");
             Console.Write(Environment.NewLine);
 
@@ -84,7 +66,7 @@ namespace RunForTheRoses
                 else
                 {
                     Console.Clear();
-                    Console.Write(horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+                    Console.Write(userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
                     Console.Write(Environment.NewLine);
                     nullAnswer = false;
                 }
@@ -135,7 +117,7 @@ namespace RunForTheRoses
 
         }
 
-         public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//I want this to return list of horses
+         public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
         {
             var derbyResults = new List<RunForTheRosesResults>();
             var serializer = new JsonSerializer();
