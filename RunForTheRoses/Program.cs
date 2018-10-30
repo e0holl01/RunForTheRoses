@@ -11,7 +11,7 @@ namespace RunForTheRoses
     {
         public static void Main(string[] args)
         {
-           
+
             //1. Welcomes the user to the app
             Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //enter a quit to exit
             Console.ReadKey(true);
@@ -71,28 +71,22 @@ namespace RunForTheRoses
                 else
                 {
                     Console.Clear();
-                    
+
                     Console.WriteLine(userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
                 }
 
-             
+
             }
 
-     
+
             //5.
             Console.WriteLine("The program will now close. Thanks!");
 
 
             Console.Read();
 
-
-            //using (StreamWriter writer = new StreamWriter("userBet.txt"))
-            //{
-            //    Console.SetOut(writer);
-            //    Console.WriteLine(userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
-            //}
 
         }
 
@@ -123,7 +117,7 @@ namespace RunForTheRoses
                     new RunForTheRosesResults().Add(new RunForTheRosesResults()); //adds values to list
                 }
             }
-            return runForTheRosesResults; //returns a list of the RunForTheRosesResults
+            return runForTheRosesResults; //converts a list of the RunForTheRosesResults
 
         }
 
@@ -140,11 +134,8 @@ namespace RunForTheRoses
             return derbyResults; //returns list of the horse races
         }
 
-
-
-        }
-
     }
+}
 
 
 
