@@ -71,8 +71,9 @@ namespace RunForTheRoses
                 else
                 {
                     Console.Clear();
-
-                    Console.WriteLine(userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+                    var HorseBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.";
+                    Console.WriteLine(HorseBetString);
+                    File.WriteAllText("./HorseBet.txt", HorseBetString);
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
                 }
