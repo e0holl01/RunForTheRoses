@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="User.cs" />
     <None Include="2016RunForTheRosesResults.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

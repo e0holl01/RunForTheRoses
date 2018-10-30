@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Text;
 
 namespace RunForTheRoses
 {
@@ -10,18 +11,21 @@ namespace RunForTheRoses
     {
         public static void Main(string[] args)
         {
+           
             //1. Welcomes the user to the app
             Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //enter a quit to exit
             Console.ReadKey(true);
             Console.Write(Environment.NewLine);
-           
+
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
             string derbyDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
-            var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json");
-            var runForTheRoses = DeserializeRunForTheRosesResults(fileName);
+
+            var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json"); //reads from the list
+
+            var runForTheRoses = DeserializeRunForTheRosesResults(fileName); //returns a list
 
             //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
             Random random = new Random();
@@ -45,14 +49,15 @@ namespace RunForTheRoses
             //4. This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
             //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
-            //User gets congrats statement if they entered Nyquist
+
+
 
             bool nullAnswer = true;
             while (nullAnswer)
             {
                 string horseBet = Console.ReadLine();
                 Console.Write(Environment.NewLine);
-                
+
 
                 var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
 
@@ -61,35 +66,40 @@ namespace RunForTheRoses
                 {
 
                     Console.WriteLine("That horse didn't run in the 2016 Run for the Roses. Please pick a horse from the list.");
-                    
+
                 }
                 else
                 {
                     Console.Clear();
-                    Console.Write(userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+                    
+                    Console.WriteLine(userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+                    nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
-                    nullAnswer = false;
                 }
 
-                Console.Write(Environment.NewLine); //provides a line space after null answer and starting loop over
-
+             
             }
 
+     
             //5.
             Console.WriteLine("The program will now close. Thanks!");
-            
 
-            fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.csv"); //this is not what i want look at mentors example
-            SerializeRunForTheRosesResultsToFile(runForTheRoses, fileName);
 
             Console.Read();
 
+
+            //using (StreamWriter writer = new StreamWriter("userBet.txt"))
+            //{
+            //    Console.SetOut(writer);
+            //    Console.WriteLine(userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.");
+            //}
+
         }
 
-      
+
 
         //The ReadFile method reads the entire file to the end of it's file
-        public static string ReadFile(string fileName) 
+        public static string ReadFile(string fileName)
         {
             using (var reader = new StreamReader(fileName))
             {
@@ -117,7 +127,7 @@ namespace RunForTheRoses
 
         }
 
-         public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
+        public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
         {
             var derbyResults = new List<RunForTheRosesResults>();
             var serializer = new JsonSerializer();
@@ -126,35 +136,19 @@ namespace RunForTheRoses
             {
                 derbyResults = serializer.Deserialize<List<RunForTheRosesResults>>(jsonReader);
             }
+
             return derbyResults; //returns list of the horse races
         }
 
-        public static void SerializeRunForTheRosesResultsToFile(List<RunForTheRosesResults> derbyResults, string fileName2) //took list and wrote to json file
-        {
-
-            var serializer = new JsonSerializer();
-            using (var writer = new StreamWriter(fileName2))
-            using (var jsonWriter = new JsonTextWriter(writer))
-            {
-                serializer.Serialize(jsonWriter, derbyResults);
-            }
 
 
         }
 
-        //static void AddHorse
-        //{
-        //    Console.Write("What horse did you bet to win the 2016 Derby?");
-        //    var horseName = Console.ReadLine();
-
-        //    var betWinHorse = new BetWinHorse
-        //    {
-        //        HorseName = horseName;
-            
-        //    }
-        }
     }
 
 
+
+
+        
 
  
