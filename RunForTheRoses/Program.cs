@@ -16,7 +16,9 @@ namespace RunForTheRoses
             //1
             Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.");
             Console.Write(Environment.NewLine);
-
+            
+            //When initially running the app, no user data is available. For the purpose of this app, I created an initial default response
+            //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers. 
             Console.WriteLine("The following displays the last bet:");
             string path = "./HorseBet.txt";
             if (!File.Exists("./HorseBet.txt"))
@@ -93,7 +95,7 @@ namespace RunForTheRoses
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
 
-                    //display list of users and past bets
+                    //display users and their last bet
 
                     string HorseBetString = userName + " bet " + horseBetAnswer.Horse + " to win.";
                     File.WriteAllText("./HorseBet.txt", HorseBetString);
