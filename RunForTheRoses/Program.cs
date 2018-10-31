@@ -17,6 +17,14 @@ namespace RunForTheRoses
             Console.Write(Environment.NewLine);
 
             Console.WriteLine("The following displays the last bet:");
+            string path = "./HorseBet.txt";
+            if (!File.Exists("./HorseBet.txt"));
+            {
+                // Create a file to write to.
+                string createText = "Erica bet on Nyquist to win." + Environment.NewLine;
+                File.WriteAllText(path, createText);
+            }
+
             string text = File.ReadAllText("./HorseBet.txt");
             Console.WriteLine("The last bet was " + text);
             Console.Write(Environment.NewLine);
