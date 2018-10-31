@@ -92,8 +92,34 @@ namespace RunForTheRoses
                 }
                 else
                 {
-                    Console.Clear();
-                    var UserBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.";
+                    var UserBetString = "";
+                    string switchCase = horseBetAnswer.Place.ToString();
+                    Console.Clear();             
+                    switch (switchCase)
+                    {
+                        case "1":
+                            UserBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + "st place.";
+                            break;
+
+                        case "2":
+                            UserBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + "nd place.";
+                            break;
+
+                        case "3":
+                            UserBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + "rd place.";
+                            break;
+
+                        case "DNF":
+                            UserBetString = userName + ", " + horseBetAnswer.Horse + " did not finish.";
+                            break;
+
+                        default:
+                            UserBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + "th place.";
+                            break;
+                    }
+
+
+                                        
                     Console.WriteLine(UserBetString);
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
