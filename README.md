@@ -4,3 +4,4 @@ This console app uses the list of running horses from the 2016 Kentucky Derby. T
 To run the program, download the project files/open in visual studio. 
 I add a breakpoint at approx. line # 135 where it says return derby results to see the list of horses(per the streaming video). 
 I look at the list and continue the program.
+To confirm the file is written to text is correct and what is recalled correctly, the file HorseBet is in the bin/Debug folder. 
