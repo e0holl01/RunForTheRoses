@@ -24,14 +24,17 @@ namespace RunForTheRoses
             if (!File.Exists("./HorseBet.txt"))
             {
                 // Create a file to write to.
-                string createText = "Erica bet on Nyquist to win." + Environment.NewLine;
+                string createText = "No previous user bets found." + Environment.NewLine;
                 File.WriteAllText(path, createText);
-      
-            }
+                Console.WriteLine(createText);
 
-            string text = File.ReadAllText("./HorseBet.txt");
-            Console.WriteLine("The last bet was " + text);
-            Console.Write(Environment.NewLine);
+            }
+            else
+            {
+                string text = File.ReadAllText("./HorseBet.txt");
+                Console.WriteLine("The last bet was " + text);
+                Console.Write(Environment.NewLine);
+            }
 
             Console.Write("Press enter to see the list of 2016 Kentucky Derby horses."); 
             Console.ReadKey(true);
