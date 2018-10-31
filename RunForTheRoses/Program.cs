@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
-using System.Text;
+
 
 namespace RunForTheRoses
 {
@@ -11,12 +11,19 @@ namespace RunForTheRoses
     {
         public static void Main(string[] args)
         {
-
-            //1. Welcomes the user to the app
-            Console.Write("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses. Press enter to see the list of placing horses."); //enter a quit to exit
-            Console.ReadKey(true);
+            //Per requirements, the persisted data must be able to be recalled when the app opens. I am showing that last data here in the beginning & Welcoming the user to the app
+            //1
+            Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.");
             Console.Write(Environment.NewLine);
 
+            Console.WriteLine("The following displays the last bet:");
+            string text = File.ReadAllText("./HorseBet.txt");
+            Console.WriteLine("The last bet was " + text);
+            Console.Write(Environment.NewLine);
+
+            Console.Write("Press enter to see the list of 2016 Kentucky Derby horses."); 
+            Console.ReadKey(true);
+            Console.Write(Environment.NewLine);
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
@@ -71,17 +78,23 @@ namespace RunForTheRoses
                 else
                 {
                     Console.Clear();
-                    var HorseBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.";
-                    Console.WriteLine(HorseBetString);
-                    File.WriteAllText("./HorseBet.txt", HorseBetString);
+                    var UserBetString = userName + ", " + horseBetAnswer.Horse + " came in " + horseBetAnswer.Place + " place.";
+                    Console.WriteLine(UserBetString);
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
+
+                    //display list of users and past bets
+
+                    string HorseBetString = userName + " bet " + horseBetAnswer.Horse + " to win.";
+                    File.WriteAllText("./HorseBet.txt", HorseBetString);
+                   
                 }
 
-
+                
+               
             }
 
-
+                                   
             //5.
             Console.WriteLine("The program will now close. Thanks!");
 
@@ -134,6 +147,8 @@ namespace RunForTheRoses
 
             return derbyResults; //returns list of the horse races
         }
+
+        
 
     }
 }
