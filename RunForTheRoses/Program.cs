@@ -51,7 +51,7 @@ namespace RunForTheRoses
 
             //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
             Random random = new Random();
-            for (int i = 19; i >= 0; i--)
+            for (int i = 0;  i < runForTheRoses.Count; i++)
             {
                 var j = random.Next(0, i);
                 Console.WriteLine(runForTheRoses[j].Horse);
