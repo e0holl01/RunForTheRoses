@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
-using System.Text;
 
 
 namespace RunForTheRoses
@@ -31,6 +30,7 @@ namespace RunForTheRoses
             }
 
             else
+       
             {
                 string text = File.ReadAllText("./HorseBet.txt");
                 Console.WriteLine("The last bet was " + text);
