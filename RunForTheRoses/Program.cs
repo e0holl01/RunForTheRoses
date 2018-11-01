@@ -21,7 +21,7 @@ namespace RunForTheRoses
             //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers. 
             Console.WriteLine("The following displays the last bet:");
             string path = "./HorseBet.txt";
-            if (!File.Exists("./HorseBet.txt"))
+            if (!File.Exists(path))
             {
                 // Create a file to write to.
                 string createText = "No previous user bets found." + Environment.NewLine;
@@ -29,6 +29,7 @@ namespace RunForTheRoses
                 Console.WriteLine(createText);
 
             }
+
             else
             {
                 string text = File.ReadAllText("./HorseBet.txt");
@@ -42,7 +43,7 @@ namespace RunForTheRoses
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
-            string derbyDirectory = Directory.GetCurrentDirectory();
+            string derbyDirectory = Directory.GetCurrentDirectory(); 
             DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
 
             var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json"); //reads from the list
@@ -51,7 +52,7 @@ namespace RunForTheRoses
 
             //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
             Random random = new Random();
-            for (int i = 0;  i < runForTheRoses.Count; i++)
+            for (int i = 0; i < runForTheRoses.Count; i++) 
             {
                 var j = random.Next(0, i);
                 Console.WriteLine(runForTheRoses[j].Horse);
@@ -77,11 +78,11 @@ namespace RunForTheRoses
             bool nullAnswer = true;
             while (nullAnswer)
             {
-                string horseBet = Console.ReadLine();
+                string horseInput = Console.ReadLine();
                 Console.Write(Environment.NewLine);
 
 
-                var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseBet, StringComparison.InvariantCultureIgnoreCase));
+                var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseInput, StringComparison.InvariantCultureIgnoreCase));
 
 
                 if (horseBetAnswer == null)
@@ -126,9 +127,32 @@ namespace RunForTheRoses
 
                     //display users and their last bet
 
-                    string HorseBetString = userName + " bet " + horseBetAnswer.Horse + " to win.";
-                    File.WriteAllText("./HorseBet.txt", HorseBetString);
+                    var horseBet = new HorseBet
+                    {
+                        UserName = userName,
+                        HorseBetPick = horseBetAnswer.Horse
+                    };
+
                    
+                    Console.WriteLine("How do you want to save your result? Press 1 for Plain Text. Press 2 for Json.");
+                    var type = Console.ReadKey().KeyChar;
+                    Saver<HorseBet> saver;
+                    if (type == '1')
+                    {
+                        saver = new PlainTextSaver(path);
+                    }
+                    else //anything other than 1 will return Json file.
+                   {
+                        saver = new JsonSaver(path);
+                    }
+
+
+                    
+                    saver.Save(horseBet);
+                    Console.Write(Environment.NewLine);
+
+
+
                 }
 
                 
@@ -147,7 +171,7 @@ namespace RunForTheRoses
 
 
 
-        //The ReadFile method reads the entire file to the end of it's file
+        //The ReadFile method reads the entire csv file to the end of it's file
         public static string ReadFile(string fileName)
         {
             using (var reader = new StreamReader(fileName))
@@ -178,16 +202,10 @@ namespace RunForTheRoses
 
         public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
         {
-            var derbyResults = new List<RunForTheRosesResults>();
-            var serializer = new JsonSerializer();
-            using (var reader = new StreamReader(fileName))
-            using (var jsonReader = new JsonTextReader(reader))
-            {
-                derbyResults = serializer.Deserialize<List<RunForTheRosesResults>>(jsonReader);
-            }
-
-            return derbyResults; //returns list of the horse races
+            return JsonConvert.DeserializeObject<List<RunForTheRosesResults>>(File.ReadAllText(fileName)); //returns derby results list
+     
         }
+       
 
         
 

@@ -46,10 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonSaver.cs" />
+    <Compile Include="PlainTextSaver.cs" />
+    <Compile Include="Saver.cs" />
     <None Include="2016RunForTheRosesResults.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="DerbyResults.cs" />
+    <Compile Include="HorseBet.cs" />
     <Compile Include="RunForTheRosesResults.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
