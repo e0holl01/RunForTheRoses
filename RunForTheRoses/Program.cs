@@ -47,7 +47,7 @@ namespace RunForTheRoses
             var fileName = Path.Combine(derbyDirectory, "2016RunForTheRosesResults.json"); //reads from the list
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName); //returns a list
 
-            //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
+            //3. writes the running horse of the derby to the console
             Random random = new Random();
             for (int i = 19; i >= 0; i--)
             //for (int i = 0; i < runForTheRoses.Count; i++) //producing duplicates now...
@@ -160,38 +160,8 @@ namespace RunForTheRoses
 
 
 
-        //The ReadFile method reads the entire csv file to the end of it's file
-        public static string ReadFile(string fileName)
+       public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
         {
-            using (var reader = new StreamReader(fileName))
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
-
-        //Makes List of RunFortheRosesResults
-        public static List<RunForTheRosesResults> ReadRunForTheRosesResults(string fileName)
-        {
-            var runForTheRosesResults = new List<RunForTheRosesResults>();
-            using (var reader = new StreamReader(fileName))
-            {
-                string line = "";
-                reader.ReadLine(); //reads next line in file and returns. Reads to end of file and returns null
-                while ((line = reader.ReadLine()) != null) //reads file to end of line if not null
-                {
-                    string[] values = line.Split(',');
-                    var raceResults = new RunForTheRosesResults { Race = values[1], Place = values[2], Horse = values[3] };
-                    new RunForTheRosesResults().Add(new RunForTheRosesResults()); //adds values to list
-                }
-            }
-            return runForTheRosesResults; //converts a list of the RunForTheRosesResults
-
-        }
-
-        public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
-        {
-            // return JsonConvert.DeserializeObject<List<RunForTheRosesResults>>(File.ReadAllText(fileName)); //returns derby results list
             var derbyResults = new List<RunForTheRosesResults>();
             var serializer = new JsonSerializer();
             using (var reader = new StreamReader(fileName))

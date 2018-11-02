@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RunForTheRoses
+﻿namespace RunForTheRoses
 {
 
     //This is the saver class. The user is asked how they want to save their data. This is the base class for Plain Text and for Json.
