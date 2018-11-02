@@ -191,7 +191,16 @@ namespace RunForTheRoses
 
         public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
         {
-            return JsonConvert.DeserializeObject<List<RunForTheRosesResults>>(File.ReadAllText(fileName)); //returns derby results list
+            // return JsonConvert.DeserializeObject<List<RunForTheRosesResults>>(File.ReadAllText(fileName)); //returns derby results list
+            var derbyResults = new List<RunForTheRosesResults>();
+            var serializer = new JsonSerializer();
+            using (var reader = new StreamReader(fileName))
+            using (var jsonReader = new JsonTextReader(reader))
+            {
+                derbyResults = serializer.Deserialize<List<RunForTheRosesResults>>(jsonReader);
+            }
+
+           return derbyResults; //returns list of the horse races
 
         }
 
