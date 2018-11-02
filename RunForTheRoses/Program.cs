@@ -15,7 +15,7 @@ namespace RunForTheRoses
             //1
             Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.");
             Console.Write(Environment.NewLine);
-            
+
             //When initially running the app, no user data is available. For the purpose of this app, I created an initial default response
             //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers. 
             Console.WriteLine("The following displays the last bet:");
@@ -30,20 +30,20 @@ namespace RunForTheRoses
             }
 
             else
-       
+
             {
                 string text = File.ReadAllText("./HorseBet.txt");
                 Console.WriteLine("The last bet was " + text);
                 Console.Write(Environment.NewLine);
             }
 
-            Console.Write("Press enter to see the list of 2016 Kentucky Derby horses."); 
+            Console.Write("Press enter to see the list of 2016 Kentucky Derby horses.");
             Console.ReadKey(true);
             Console.Write(Environment.NewLine);
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
-            string derbyDirectory = Directory.GetCurrentDirectory(); 
+            string derbyDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
 
             var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json"); //reads from the list
@@ -52,7 +52,8 @@ namespace RunForTheRoses
 
             //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
             Random random = new Random();
-            for (int i = 0; i < runForTheRoses.Count; i++) 
+            for (int i = 19; i >= 0; i--)
+            //for (int i = 0; i < runForTheRoses.Count; i++) //producing duplicates now...
             {
                 var j = random.Next(0, i);
                 Console.WriteLine(runForTheRoses[j].Horse);
@@ -95,7 +96,7 @@ namespace RunForTheRoses
                 {
                     var UserBetString = "";
                     string switchCase = horseBetAnswer.Place.ToString();
-                    Console.Clear();             
+                    Console.Clear();
                     switch (switchCase)
                     {
                         case "1":
@@ -120,7 +121,7 @@ namespace RunForTheRoses
                     }
 
 
-                                        
+
                     Console.WriteLine(UserBetString);
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
@@ -133,7 +134,7 @@ namespace RunForTheRoses
                         HorseBetPick = horseBetAnswer.Horse
                     };
 
-                   
+
                     Console.WriteLine("How do you want to save your result? Press 1 for Plain Text. Press 2 for Json.");
                     var type = Console.ReadKey().KeyChar;
                     Saver<HorseBet> saver;
@@ -142,12 +143,12 @@ namespace RunForTheRoses
                         saver = new PlainTextSaver(path);
                     }
                     else //anything other than 1 will return Json file.
-                   {
+                    {
                         saver = new JsonSaver(path);
                     }
 
 
-                    
+
                     saver.Save(horseBet);
                     Console.Write(Environment.NewLine);
 
@@ -155,11 +156,11 @@ namespace RunForTheRoses
 
                 }
 
-                
-               
+
+
             }
 
-                                   
+
             //5.
             Console.WriteLine("The program will now close. Thanks!");
 
@@ -203,18 +204,11 @@ namespace RunForTheRoses
         public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
         {
             return JsonConvert.DeserializeObject<List<RunForTheRosesResults>>(File.ReadAllText(fileName)); //returns derby results list
-     
-        }
-       
 
-        
+        }
+
+
+
 
     }
 }
-
-
-
-
-        
-
- 
