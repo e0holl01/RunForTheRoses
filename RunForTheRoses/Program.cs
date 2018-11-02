@@ -44,10 +44,7 @@ namespace RunForTheRoses
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
             string derbyDirectory = Directory.GetCurrentDirectory();
-            DirectoryInfo derbydirectory = new DirectoryInfo(derbyDirectory);
-
-            var fileName = Path.Combine(derbydirectory.FullName, "2016RunForTheRosesResults.json"); //reads from the list
-
+            var fileName = Path.Combine(derbyDirectory, "2016RunForTheRosesResults.json"); //reads from the list
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName); //returns a list
 
             //3. writes the running horse of the derby to the console from 2016RunForTheRoses.cvs file to console
@@ -146,27 +143,18 @@ namespace RunForTheRoses
                     {
                         saver = new JsonSaver(path);
                     }
-
-
-
+                                       
                     saver.Save(horseBet);
                     Console.Write(Environment.NewLine);
-
-
-
+                                       
                 }
 
-
-
             }
-
 
             //5.
             Console.WriteLine("The program will now close. Thanks!");
 
-
             Console.Read();
-
 
         }
 
@@ -206,9 +194,6 @@ namespace RunForTheRoses
             return JsonConvert.DeserializeObject<List<RunForTheRosesResults>>(File.ReadAllText(fileName)); //returns derby results list
 
         }
-
-
-
 
     }
 }

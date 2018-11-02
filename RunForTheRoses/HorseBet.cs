@@ -12,7 +12,9 @@ namespace RunForTheRoses
         public string HorseBetPick { get; set; }
         public override string ToString()
         {
-            return UserName + " bet " + HorseBetPick + " to win.";
+           
+           return UserName + " bet " + HorseBetPick + " to win.";
+ 
         }
     }
 }
