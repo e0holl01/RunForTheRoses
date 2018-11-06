@@ -58,7 +58,6 @@ namespace RunForTheRoses
                 runForTheRoses[j] = runForTheRoses[i];
                 runForTheRoses[i] = holder;
             }
-
             Console.Write(Environment.NewLine); //provides space after list of horses
 
             Console.WriteLine("Please enter your name to place a bet.");
@@ -71,23 +70,17 @@ namespace RunForTheRoses
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
             //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
 
-
-
             bool nullAnswer = true;
             while (nullAnswer)
             {
                 string horseInput = Console.ReadLine();
                 Console.Write(Environment.NewLine);
-
-
+                
                 var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseInput, StringComparison.InvariantCultureIgnoreCase));
-
-
+                
                 if (horseBetAnswer == null)
                 {
-
                     Console.WriteLine("That horse didn't run in the 2016 Run for the Roses. Please pick a horse from the list.");
-
                 }
                 else
                 {
@@ -117,8 +110,6 @@ namespace RunForTheRoses
                             break;
                     }
 
-
-
                     Console.WriteLine(UserBetString);
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
@@ -130,8 +121,7 @@ namespace RunForTheRoses
                         UserName = userName,
                         HorseBetPick = horseBetAnswer.Horse
                     };
-
-
+                    
                     Console.WriteLine("How do you want to save your result? Press 1 for Plain Text. Press 2 for Json.");
                     var type = Console.ReadKey().KeyChar;
                     Saver<HorseBet> saver;
