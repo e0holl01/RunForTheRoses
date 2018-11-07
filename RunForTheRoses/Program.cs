@@ -47,7 +47,7 @@ namespace RunForTheRoses
             var fileName = Path.Combine(derbyDirectory, "2016RunForTheRosesResults.json"); //reads from the list
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName); //returns a list
 
-            //3. writes the running horse of the derby to the console in shuffled order
+            //2a. writes the running horse of the derby to the console in shuffled order
             Random random = new Random();
             //for (int i = 19; i >= 0; i--) this works but i want to use the list and the count method so i'm not relying on just a number in the list.
             //for (int i = 0; i < runForTheRoses.Count; i++) //producing duplicates now...gotthis method from the mentor, it initially worked so not sure why it quit working
@@ -62,13 +62,16 @@ namespace RunForTheRoses
             }
             Console.Write(Environment.NewLine); //provides space after list of horses
 
+            //3 User enters name to place their bet
             Console.WriteLine("Please enter your name to place a bet.");
             var userName = Console.ReadLine();
             Console.Write(Environment.NewLine);
+
+            //4 User enter's their bet
             Console.Write("What horse did you bet to win the 2016 Derby?");
             Console.Write(Environment.NewLine);
 
-            //4. This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
+            //4a This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
             //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
 
@@ -116,7 +119,7 @@ namespace RunForTheRoses
                     nullAnswer = false;//breaks out of loop
                     Console.Write(Environment.NewLine);
 
-                    //display users and their last bet
+                    //5 display users and their last bet
 
                     var horseBet = new HorseBet
                     {
@@ -143,7 +146,7 @@ namespace RunForTheRoses
 
             }
 
-            //5.
+            //6
             Console.WriteLine("The program will now close. Thanks!");
 
             Console.Read();
