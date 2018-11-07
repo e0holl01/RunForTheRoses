@@ -134,7 +134,7 @@ namespace RunForTheRoses
                     {
                         saver = new PlainTextSaver(path);
                     }
-                    else //anything other than 1 will return Json file.
+                    else //anything other than 1 will return Json in plain text file.
                     {
                         saver = new JsonSaver(path);
                     }
