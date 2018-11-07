@@ -47,7 +47,7 @@ namespace RunForTheRoses
             var fileName = Path.Combine(derbyDirectory, "2016RunForTheRosesResults.json"); //reads from the list
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName); //returns a list
 
-            //3. writes the running horse of the derby to the console
+            //3. writes the running horse of the derby to the console in shuffled order
             Random random = new Random();
             //for (int i = 19; i >= 0; i--)
             //for (int i = 0; i < runForTheRoses.Count; i++) //producing duplicates now...
