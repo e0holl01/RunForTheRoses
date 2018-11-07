@@ -49,13 +49,14 @@ namespace RunForTheRoses
 
             //3. writes the running horse of the derby to the console
             Random random = new Random();
-            for (int i = 19; i >= 0; i--)
+            //for (int i = 19; i >= 0; i--)
             //for (int i = 0; i < runForTheRoses.Count; i++) //producing duplicates now...
+            for (int i = runForTheRoses.Count -1; i>= 1; i--)
             {
-                var j = random.Next(0, i);
-                Console.WriteLine(runForTheRoses[j].Horse);
-                var holder = runForTheRoses[j];
-                runForTheRoses[j] = runForTheRoses[i];
+                var rdm = random.Next(0, i + 1);
+                Console.WriteLine(runForTheRoses[rdm].Horse);
+                var holder = runForTheRoses[rdm];
+                runForTheRoses[rdm] = runForTheRoses[i];
                 runForTheRoses[i] = holder;
             }
             Console.Write(Environment.NewLine); //provides space after list of horses
@@ -159,6 +160,7 @@ namespace RunForTheRoses
             {
                 derbyResults = serializer.Deserialize<List<RunForTheRosesResults>>(jsonReader);
             }
+
 
            return derbyResults; //returns list of the horse races
 
