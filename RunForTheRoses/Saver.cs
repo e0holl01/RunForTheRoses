@@ -10,5 +10,9 @@
         {
             Path = path;
         }
+
+
+        public abstract T Load(string text);
+
     }
 }

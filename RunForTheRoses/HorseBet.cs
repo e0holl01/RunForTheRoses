@@ -7,7 +7,7 @@
         public override string ToString()
         {
           
-           return UserName + " bet " + HorseBetPick + " to win.";
+           return $"{UserName},{HorseBetPick}";
 
         }
     }

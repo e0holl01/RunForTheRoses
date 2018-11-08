@@ -33,6 +33,7 @@ namespace RunForTheRoses
 
             {
                 string text = File.ReadAllText("./HorseBet.txt");
+         
                 Console.WriteLine("The last bet was " + text);
                 Console.Write(Environment.NewLine);
             }
@@ -44,7 +45,7 @@ namespace RunForTheRoses
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
             string derbyDirectory = Directory.GetCurrentDirectory();
-            var fileName = Path.Combine(derbyDirectory, "2016RunForTheRosesResults.json"); //reads from the list
+            var fileName = Path.Combine(derbyDirectory, "2016RunForTheRosesResults.json"); //reads from the Json file
             var runForTheRoses = DeserializeRunForTheRosesResults(fileName); //returns a list
 
             //2a. writes the running horse of the derby to the console in shuffled order
@@ -137,6 +138,7 @@ namespace RunForTheRoses
                     else //anything other than 1 will return Json in plain text file.
                     {
                         saver = new JsonSaver(path);
+                        
                     }
                                        
                     saver.Save(horseBet);

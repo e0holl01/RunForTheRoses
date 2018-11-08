@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace RunForTheRoses
 {
@@ -8,6 +9,19 @@ namespace RunForTheRoses
         public PlainTextSaver(string path) : base(path)
         {
         }
+
+        public override HorseBet Load(string text)
+        {
+            text.Split(',');
+            var Names = text.Split(',');
+            return new HorseBet
+            {
+                HorseBetPick = Names.Last(),
+                UserName = Names.First()
+            };
+            
+        }
+
         public override void Save(HorseBet obj)
         {
             File.WriteAllText(Path, obj.ToString());

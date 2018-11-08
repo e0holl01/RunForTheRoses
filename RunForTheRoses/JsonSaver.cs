@@ -16,5 +16,10 @@ namespace RunForTheRoses
             var data = JsonConvert.SerializeObject(obj);
             File.WriteAllText(Path, data);
         }
+
+        public override HorseBet Load(string text)
+        {
+            return JsonConvert.DeserializeObject<HorseBet>(text);
+        }
     }
 }
