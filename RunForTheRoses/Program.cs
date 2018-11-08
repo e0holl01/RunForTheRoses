@@ -9,6 +9,7 @@ namespace RunForTheRoses
 {
     class Program
     {
+   
         public static void Main(string[] args)
         {
             //Per requirements, the persisted data must be able to be recalled when the app opens. I am showing that last data here in the beginning & Welcoming the user to the app
@@ -28,12 +29,9 @@ namespace RunForTheRoses
                 Console.WriteLine(createText);
 
             }
-
             else
-
             {
                 string text = File.ReadAllText("./HorseBet.txt");
-         
                 Console.WriteLine("The last bet was " + text);
                 Console.Write(Environment.NewLine);
             }
@@ -131,13 +129,20 @@ namespace RunForTheRoses
                     Console.WriteLine("How do you want to save your result? Press 1 for Plain Text. Press 2 for Json.");
                     var type = Console.ReadKey().KeyChar;
                     Saver<HorseBet> saver;
+
+                    
+                    
+
                     if (type == '1')
                     {
                         saver = new PlainTextSaver(path);
+                     
+                                             
                     }
                     else //anything other than 1 will return Json in plain text file.
                     {
                         saver = new JsonSaver(path);
+                        
                         
                     }
                                        

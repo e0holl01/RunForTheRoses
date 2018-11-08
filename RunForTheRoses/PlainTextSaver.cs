@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace RunForTheRoses
@@ -29,6 +30,5 @@ namespace RunForTheRoses
             
         }
 
-    
     }
 }
