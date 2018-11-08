@@ -18,8 +18,9 @@ namespace RunForTheRoses
         }
 
         //deserializes plain text
-        public override HorseBet Load(string text)
+        public override HorseBet Load()
         {
+            var text = File.ReadAllText(Path);
             text.Split(',');
             var Names = text.Split(',');
             return new HorseBet

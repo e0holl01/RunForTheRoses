@@ -12,7 +12,7 @@
         }
 
 
-        public abstract T Load(string text);
+        public abstract T Load();
 
     }
 }

@@ -19,8 +19,9 @@ namespace RunForTheRoses
         }
 
         //deserializes json
-        public override HorseBet Load(string text)
+        public override HorseBet Load()
         {
+            var text = File.ReadAllText(Path);
             return JsonConvert.DeserializeObject<HorseBet>(text);
         }
     }

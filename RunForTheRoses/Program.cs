@@ -9,7 +9,7 @@ namespace RunForTheRoses
 {
     class Program
     {
-   
+
         public static void Main(string[] args)
         {
             //Per requirements, the persisted data must be able to be recalled when the app opens. I am showing that last data here in the beginning & Welcoming the user to the app
@@ -19,22 +19,67 @@ namespace RunForTheRoses
 
             //When initially running the app, no user data is available. For the purpose of this app, I created an initial default response
             //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers. 
-            Console.WriteLine("The following displays the last bet:");
-            string path = "./HorseBet.txt";
-            if (!File.Exists(path))
+            HorseBet lastBet = null;
+            string path = "./HorseBet";
+            if (!File.Exists(path + ".txt") && !File.Exists(path + ".json"))
             {
-                // Create a file to write to.
-                string createText = "No previous user bets found." + Environment.NewLine;
-                File.WriteAllText(path, createText);
-                Console.WriteLine(createText);
 
+                              
+                Console.WriteLine("No previous user bets found.");
             }
             else
             {
-                string text = File.ReadAllText("./HorseBet.txt");
-                Console.WriteLine("The last bet was " + text);
+                
+                
+                while (lastBet == null)
+                {
+                    Console.WriteLine("How do you want to load the last Horse Bet?  Press 1 for Plain Text. Press 2 for Json.");
+                    var type = Console.ReadKey().KeyChar;
+                    Saver<HorseBet> saver;
+
+
+
+                    if (type == '1')
+                    {
+                        if (!File.Exists(path + ".txt"))
+                        {
+                            Console.WriteLine("File does not exits. Pick another option");
+
+                        }
+                        else
+                        {
+                            saver = new PlainTextSaver(path + ".txt");
+
+                            lastBet = saver.Load();
+                        }
+
+
+                    }
+                    else //will read the json file
+                    {
+                        if (!File.Exists(path + ".json"))
+                        {
+                            Console.WriteLine("File does not exits. Pick another option");
+
+                        }
+                        else
+                        {
+                            saver = new JsonSaver(path + ".json");
+
+                            lastBet = saver.Load();
+                        }
+
+
+                    }
+                }
+
+                Console.Write(Environment.NewLine);                
+                Console.WriteLine($"The last bet was {lastBet.UserName} bet on {lastBet.HorseBetPick}");
                 Console.Write(Environment.NewLine);
             }
+
+        
+
 
             Console.Write("Press enter to see the list of 2016 Kentucky Derby horses.");
             Console.ReadKey(true);
@@ -50,8 +95,8 @@ namespace RunForTheRoses
             Random random = new Random();
             //for (int i = 19; i >= 0; i--) this works but i want to use the list and the count method so i'm not relying on just a number in the list.
             //for (int i = 0; i < runForTheRoses.Count; i++) //producing duplicates now...gotthis method from the mentor, it initially worked so not sure why it quit working
-            for (int i = runForTheRoses.Count -1; i>= 1; i--)
-     
+            for (int i = runForTheRoses.Count - 1; i >= 1; i--)
+
             {
                 var rdm = random.Next(0, i + 1);
                 Console.WriteLine(runForTheRoses[rdm].Horse);
@@ -79,9 +124,9 @@ namespace RunForTheRoses
             {
                 string horseInput = Console.ReadLine();
                 Console.Write(Environment.NewLine);
-                
+
                 var horseBetAnswer = runForTheRoses.FirstOrDefault(r => string.Equals(r.Horse, horseInput, StringComparison.InvariantCultureIgnoreCase));
-                
+
                 if (horseBetAnswer == null)
                 {
                     Console.WriteLine("That horse didn't run in the 2016 Run for the Roses. Please pick a horse from the list.");
@@ -125,30 +170,28 @@ namespace RunForTheRoses
                         UserName = userName,
                         HorseBetPick = horseBetAnswer.Horse
                     };
-                    
+
                     Console.WriteLine("How do you want to save your result? Press 1 for Plain Text. Press 2 for Json.");
                     var type = Console.ReadKey().KeyChar;
                     Saver<HorseBet> saver;
 
-                    
-                    
 
                     if (type == '1')
                     {
-                        saver = new PlainTextSaver(path);
-                     
-                                             
+                        saver = new PlainTextSaver(path + ".txt");
+
+
                     }
                     else //anything other than 1 will return Json in plain text file.
                     {
-                        saver = new JsonSaver(path);
-                        
-                        
+                        saver = new JsonSaver(path + ".json");
+
+
                     }
-                                       
+
                     saver.Save(horseBet);
                     Console.Write(Environment.NewLine);
-                                       
+
                 }
 
             }
@@ -162,7 +205,7 @@ namespace RunForTheRoses
 
 
 
-       public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
+        public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
         {
             var derbyResults = new List<RunForTheRosesResults>();
             var serializer = new JsonSerializer();
@@ -173,7 +216,7 @@ namespace RunForTheRoses
             }
 
 
-           return derbyResults; //returns list of the horse races
+            return derbyResults; //returns list of the horse races
 
         }
 
