@@ -11,12 +11,14 @@ namespace RunForTheRoses
         {
         }
 
+        //saves as Json array
         public override void Save(HorseBet obj)
         {
             var data = JsonConvert.SerializeObject(obj);
             File.WriteAllText(Path, data);
         }
 
+        //deserializes json
         public override HorseBet Load(string text)
         {
             return JsonConvert.DeserializeObject<HorseBet>(text);

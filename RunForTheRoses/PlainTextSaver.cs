@@ -10,6 +10,13 @@ namespace RunForTheRoses
         {
         }
 
+        //saves as plain text
+        public override void Save(HorseBet obj)
+        {
+            File.WriteAllText(Path, obj.ToString());
+        }
+
+        //deserializes plain text
         public override HorseBet Load(string text)
         {
             text.Split(',');
@@ -22,9 +29,6 @@ namespace RunForTheRoses
             
         }
 
-        public override void Save(HorseBet obj)
-        {
-            File.WriteAllText(Path, obj.ToString());
-        }
+    
     }
 }
