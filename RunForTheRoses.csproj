@@ -46,9 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\JsonSaver.cs" />
-    <Compile Include="Repositories\PlainTextSaver.cs" />
-    <Compile Include="Repositories\Saver.cs" />
+    <Compile Include="Repository\JsonSaver.cs" />
+    <Compile Include="Repository\PlainTextSaver.cs" />
+    <Compile Include="Repository\RunForTheRoses.cs" />
+    <Compile Include="Repository\Saver.cs" />
     <None Include="2016RunForTheRosesResults.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using RunForTheRoses.Repository;
 
 
 namespace RunForTheRoses
@@ -39,7 +40,7 @@ namespace RunForTheRoses
                     {
                         if (!File.Exists(path + ".txt"))
                         {
-                            Console.WriteLine("File does not exits. Pick another option.");
+                            Console.WriteLine("\nFile does not exits. Pick another option.");
 
                         }
                         else //if the txt file does exist
@@ -87,7 +88,7 @@ namespace RunForTheRoses
 
             //2a. writes the running horse of the derby to the console in shuffled order
             Random random = new Random();
-            for (int i = runForTheRoses.Count - 1; i >= 1; i--)
+            for (int i = runForTheRoses.Count - 1; i >= 0; i--)
 
             {
                 var rdm = random.Next(0, i + 1);
@@ -96,6 +97,8 @@ namespace RunForTheRoses
                 runForTheRoses[rdm] = runForTheRoses[i];
                 runForTheRoses[i] = holder;
             }
+
+
             Console.Write(Environment.NewLine); //provides space after list of horses
 
             //3 User enters name to place their bet
@@ -209,6 +212,7 @@ namespace RunForTheRoses
             return derbyResults; //returns list of the horse races
 
         }
+
 
     }
 }
