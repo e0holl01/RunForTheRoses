@@ -46,15 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsonSaver.cs" />
-    <Compile Include="PlainTextSaver.cs" />
-    <Compile Include="Saver.cs" />
+    <Compile Include="AnswerHelper.cs" />
+    <Compile Include="HorseBetLoader.cs" />
+    <Compile Include="Repository\JsonRepository.cs" />
+    <Compile Include="Repository\PlainTextRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\RunForTheRoses.cs" />
     <None Include="2016RunForTheRosesResults.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="DerbyResults.cs" />
-    <Compile Include="HorseBet.cs" />
-    <Compile Include="RunForTheRosesResults.cs">
+    <Compile Include="Models\DerbyResults.cs" />
+    <Compile Include="Models\HorseBet.cs" />
+    <Compile Include="Models\RunForTheRosesResult.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />
