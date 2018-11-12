@@ -14,9 +14,8 @@ namespace RunForTheRoses
         {
             //1. Welcoming the user to the app
             
-            Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.");
-            Console.Write(Environment.NewLine);
-
+            Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.\n");
+           
             //2. 
             //When initially running the app, no user data is available. For the purpose of this app, I created an initial default response
             //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers. 
@@ -24,30 +23,26 @@ namespace RunForTheRoses
             string path = "./HorseBet";
             if (!File.Exists(path + ".txt") && !File.Exists(path + ".json"))
             {
-
-                              
-                Console.WriteLine("No previous user bets found.");
+                                             
+                Console.WriteLine("No previous user bets found. \n");
             }
             else
             {
-                
-                
+                               
                 while (lastBet == null)
                 {
                     Console.WriteLine("How do you want to load the last Horse Bet?  Press 1 for Plain Text. Press 2 for Json.");
                     var type = Console.ReadKey().KeyChar;
                     Saver<HorseBet> saver;
-
-
-
-                    if (type == '1')
+                    
+                    if (type == '1') //if the txt file does not exits
                     {
                         if (!File.Exists(path + ".txt"))
                         {
-                            Console.WriteLine("File does not exits. Pick another option");
+                            Console.WriteLine("File does not exits. Pick another option.");
 
                         }
-                        else
+                        else //if the txt file does exist
                         {
                             saver = new PlainTextSaver(path + ".txt");
 
@@ -60,7 +55,7 @@ namespace RunForTheRoses
                     {
                         if (!File.Exists(path + ".json"))
                         {
-                            Console.WriteLine("File does not exits. Pick another option");
+                            Console.WriteLine("\nFile does not exits. Pick another option.");
 
                         }
                         else
@@ -69,20 +64,20 @@ namespace RunForTheRoses
 
                             lastBet = saver.Load();
                         }
-
-
+                        
                     }
+                    
                 }
+                
 
-                Console.Write(Environment.NewLine);                
-                Console.WriteLine($"The last bet was {lastBet.UserName} bet on {lastBet.HorseBetPick}");
-                Console.Write(Environment.NewLine);
+
+                Console.WriteLine($"\nThe last bet was {lastBet.UserName} bet on {lastBet.HorseBetPick}\n");
+               
             }       
 
 
-            Console.Write("Press enter to see the list of 2016 Kentucky Derby horses.");
-            Console.ReadKey(true);
-            Console.Write(Environment.NewLine);
+            Console.Write("Press enter to see the list of 2016 Kentucky Derby horses.\n");
+            Console.ReadKey();
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
@@ -92,8 +87,6 @@ namespace RunForTheRoses
 
             //2a. writes the running horse of the derby to the console in shuffled order
             Random random = new Random();
-            //for (int i = 19; i >= 0; i--) this works but i want to use the list and the count method so i'm not relying on just a number in the list.
-            //for (int i = 0; i < runForTheRoses.Count; i++) //producing duplicates now...gotthis method from the mentor, it initially worked so not sure why it quit working
             for (int i = runForTheRoses.Count - 1; i >= 1; i--)
 
             {
@@ -189,14 +182,13 @@ namespace RunForTheRoses
                     }
 
                     saver.Save(horseBet);
-                    Console.Write(Environment.NewLine);
-
+                   
                 }
 
             }
 
             //6
-            Console.WriteLine("The program will now close. Thanks!");
+            Console.WriteLine("\nGot it! The program will now close.");
 
             Console.Read();
 
