@@ -153,8 +153,7 @@ namespace RunForTheRoses
 
                     Console.WriteLine(UserBetString);
                     nullAnswer = false;//breaks out of loop
-                    Console.Write(Environment.NewLine);
-
+                  
                     //5 display users and their last bet
 
                     var horseBet = new HorseBet
@@ -163,7 +162,7 @@ namespace RunForTheRoses
                         HorseBetPick = horseBetAnswer.Horse
                     };
 
-                    Console.WriteLine("How do you want to save your result? Press 1 for Plain Text. Press 2 for Json.");
+                    Console.WriteLine("\nHow do you want to save your result? Press 1 for Plain Text. Press 2 for Json.");
                     var type = Console.ReadKey().KeyChar;
                     Saver<HorseBet> saver;
 
@@ -188,7 +187,7 @@ namespace RunForTheRoses
             }
 
             //6
-            Console.WriteLine("\nGot it! The program will now close.");
+            Console.WriteLine("\n\nGot it! The program will now close.");
 
             Console.Read();
 
