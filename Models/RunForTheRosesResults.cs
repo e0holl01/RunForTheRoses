@@ -1,6 +1,4 @@
-﻿using System;
-
-public class Rootobject
+﻿public class Rootobject
 {
     public RunForTheRosesResults[] RunForTheRosesResults { get; set; }
 }
