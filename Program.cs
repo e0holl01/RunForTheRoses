@@ -147,7 +147,7 @@ namespace RunForTheRoses
                     }
 
                     Console.WriteLine(UserBetString);
-                    nullAnswer = false;//breaks out of loop
+                    nullAnswer = false;//breaks out of loop as long as user picks valid horse from list
 
                     //5 display users and their last bet
 
