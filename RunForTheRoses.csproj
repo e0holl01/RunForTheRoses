@@ -53,9 +53,9 @@
     <None Include="2016RunForTheRosesResults.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="Data Models\DerbyResults.cs" />
-    <Compile Include="Data Models\HorseBet.cs" />
-    <Compile Include="Data Models\RunForTheRosesResults.cs">
+    <Compile Include="Models\DerbyResults.cs" />
+    <Compile Include="Models\HorseBet.cs" />
+    <Compile Include="Models\RunForTheRosesResults.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />

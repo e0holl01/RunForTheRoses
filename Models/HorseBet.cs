@@ -1,4 +1,4 @@
-﻿namespace RunForTheRoses
+﻿namespace RunForTheRoses.Models
 {
     class HorseBet
     {

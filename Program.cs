@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using RunForTheRoses.Models;
 using RunForTheRoses.Repository;
 
 
@@ -14,9 +15,9 @@ namespace RunForTheRoses
         public static void Main(string[] args)
         {
             //1. Welcoming the user to the app
-            
+
             Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.\n");
-           
+
             //2. 
             //When initially running the app, no user data is available. For the purpose of this app, I created an initial default response
             //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers. 
@@ -24,18 +25,18 @@ namespace RunForTheRoses
             string path = "./HorseBet";
             if (!File.Exists(path + ".txt") && !File.Exists(path + ".json"))
             {
-                                             
+
                 Console.WriteLine("No previous user bets found. \n");
             }
             else
             {
-                               
+
                 while (lastBet == null)
                 {
                     Console.WriteLine("How do you want to load the last Horse Bet?  Press 1 for Plain Text. Press 2 for Json.");
                     var type = Console.ReadKey().KeyChar;
                     Saver<HorseBet> saver;
-                    
+
                     if (type == '1') //if the txt file does not exits
                     {
                         if (!File.Exists(path + ".txt"))
@@ -65,16 +66,16 @@ namespace RunForTheRoses
 
                             lastBet = saver.Load();
                         }
-                        
+
                     }
-                    
+
                 }
-                
 
 
-                Console.WriteLine($"\nThe last bet was {lastBet.UserName} bet on {lastBet.HorseBetPick}\n");
-               
-            }       
+
+                Console.WriteLine($"\nThe last bet was {lastBet.UserName} bet on {lastBet.HorseBetPick}.\n");
+
+            }
 
 
             Console.Write("Press enter to see the list of 2016 Kentucky Derby horses.\n");
@@ -82,22 +83,13 @@ namespace RunForTheRoses
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
             //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
-            string derbyDirectory = Directory.GetCurrentDirectory();
-            var fileName = Path.Combine(derbyDirectory, "2016RunForTheRosesResults.json"); //reads from the Json file
-            var runForTheRoses = DeserializeRunForTheRosesResults(fileName); //returns a list
+
+            var runForTheRoses = RunForTheRosesRepo.DeserializeRunForTheRosesResults("./2016RunForTheRosesResults.json"); //returns a list
 
             //2a. writes the running horse of the derby to the console in shuffled order
-            Random random = new Random();
-            for (int i = runForTheRoses.Count - 1; i >= 0; i--)
 
-            {
-                var rdm = random.Next(0, i + 1);
-                Console.WriteLine(runForTheRoses[rdm].Horse);
-                var holder = runForTheRoses[rdm];
-                runForTheRoses[rdm] = runForTheRoses[i];
-                runForTheRoses[i] = holder;
-            }
-
+            var shuffled = RunForTheRosesRepo.Shuffle(runForTheRoses);
+            RunForTheRosesRepo.Print(shuffled);
 
             Console.Write(Environment.NewLine); //provides space after list of horses
 
@@ -156,7 +148,7 @@ namespace RunForTheRoses
 
                     Console.WriteLine(UserBetString);
                     nullAnswer = false;//breaks out of loop
-                  
+
                     //5 display users and their last bet
 
                     var horseBet = new HorseBet
@@ -184,7 +176,7 @@ namespace RunForTheRoses
                     }
 
                     saver.Save(horseBet);
-                   
+
                 }
 
             }
@@ -195,24 +187,6 @@ namespace RunForTheRoses
             Console.Read();
 
         }
-
-
-
-        public static List<RunForTheRosesResults> DeserializeRunForTheRosesResults(string fileName)//returns list of horses
-        {
-            var derbyResults = new List<RunForTheRosesResults>();
-            var serializer = new JsonSerializer();
-            using (var reader = new StreamReader(fileName))
-            using (var jsonReader = new JsonTextReader(reader))
-            {
-                derbyResults = serializer.Deserialize<List<RunForTheRosesResults>>(jsonReader);
-            }
-
-
-            return derbyResults; //returns list of the horse races
-
-        }
-
 
     }
 }
