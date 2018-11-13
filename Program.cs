@@ -89,17 +89,14 @@ namespace RunForTheRoses
             var shuffled = RunForTheRosesRepo.Shuffle(runForTheRoses);
             RunForTheRosesRepo.Print(shuffled);
 
-            Console.Write(Environment.NewLine); //provides space after list of horses
 
             //3 User enters name to place their bet
-            Console.WriteLine("Please enter your name to place a bet.");
+            Console.WriteLine("\nPlease enter your name to place a bet.");
             var userName = Console.ReadLine();
-            Console.Write(Environment.NewLine);
-
+           
             //4 User enter's their bet
-            Console.Write("What horse did you bet to win the 2016 Derby?");
-            Console.Write(Environment.NewLine);
-
+            Console.Write("\nWhat horse did you bet to win the 2016 Derby?\n");
+            
             //4a This code will validate the user's input on the horse they bet on and will display what place they finished and if their horse is not a valid horse it will return null
             //user entry returned from the Console.ReadLine method will be stored in the horseBet variable
             //If user selects a horse that is not on the list or presses enter and no value is captured. User needs to be prompted to pick a horse from the list
