@@ -16,7 +16,7 @@ namespace RunForTheRoses
         {
             //1. Welcoming the user to the app
 
-            Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.\n");
+            Console.WriteLine("Welcome to the Repository for the 2016 Kentucky Derby's Run for the Roses.\n"); //\n = new line
 
             //2. 
             //When initially running the app, no user data is available. For the purpose of this app, I created an initial default response
