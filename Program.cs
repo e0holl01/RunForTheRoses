@@ -12,7 +12,7 @@ namespace RunForTheRoses
     class Program
     {
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             //1. Welcoming the user to the app
 
@@ -20,7 +20,7 @@ namespace RunForTheRoses
 
             //2. 
             //When initially running the app, no user data is available. For the purpose of this app, I created an initial default response
-            //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers. 
+            //When the program is stoped, closed and ran again, it will then return the stored data from the user's answers and load selection. 
             HorseBet lastBet = null;
             string path = "./HorseBet";
             if (!File.Exists(path + ".txt") && !File.Exists(path + ".json"))

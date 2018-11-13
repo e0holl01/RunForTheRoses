@@ -11,8 +11,5 @@ public class RunForTheRosesResults
     public object Place { get; set; }
     public string Horse { get; set; }
 
-    //internal void Add(RunForTheRosesResults runForTheRosesResults)
-    //{
-    //    throw new NotImplementedException();
-    //}
+
 }
