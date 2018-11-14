@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using RunForTheRoses.Models;
 using System.IO;
-using RunForTheRoses.Models;
+using Newtonsoft.Json;
 
 namespace RunForTheRoses
 {
