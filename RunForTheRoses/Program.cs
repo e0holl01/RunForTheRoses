@@ -71,7 +71,7 @@ namespace RunForTheRoses
 
 
 
-                Console.WriteLine($"\nThe last bet was {lastBet.UserName} bet on {lastBet.HorseBetPick}.\n");
+            Console.WriteLine($"\nThe last bet was {lastBet.UserName} bet on {lastBet.HorseBetPick}.\n");
 
             }
 
@@ -80,7 +80,7 @@ namespace RunForTheRoses
             Console.ReadKey();
             Console.Clear();    //This method will clear the welcome line. //I didn't want the welcome line to be visible the entire ime the app was open
 
-            //2. The user is then able to see the list of the 2016 Kentucky Derby horses that ran in the race
+            //2. Deserializes json file to print to console
 
             var runForTheRoses = RunForTheRosesRepo.DeserializeRunForTheRosesResults("./2016RunForTheRosesResults.json"); //returns a list
 
