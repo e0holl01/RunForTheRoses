@@ -7,4 +7,4 @@ My dataset is the Json file 2016RunForTheRosesResults.json. It gets deserialized
 If you  add a breakpoint at approx. line # 139 where it says return derby results to see the list of horses(per the streaming video). 
 you can confirm and  look at the list of horses and continue the program.
 
-To confirm the file is written to text is correct and what is recalled correctly, the file HorseBet is in the bin/Debug folder titled HorseBet.Depending on how the results is saved, the file will be a txt or Json file.
+To confirm the file is written to text is correct and what is recalled correctly, the file HorseBet is in the binDebug/Release folder titled HorseBet.Depending on how the results is saved, the file will be a txt or Json file.
